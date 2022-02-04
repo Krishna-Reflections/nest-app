@@ -26,7 +26,7 @@ import { Auth, AuthSchema } from './schemas/auth.schema';
     ]),
     JwtModule.register({
       secret: 'secret',
-      signOptions: { expiresIn: '600s' },
+      signOptions: { expiresIn: '900s' },
     }),
   ],
   controllers: [AuthController],

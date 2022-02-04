@@ -14,13 +14,15 @@ import {
 } from '@nestjs/common';
 import { ErrorResponseDTO } from 'src/utils/helpers';
 import { Public } from './decorator';
-import { ApiCookieAuth } from '@nestjs/swagger';
+import { ApiCookieAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiCookieAuth()
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(private authserVice: AuthService) {}
 
+  @ApiResponse({ status: 201, description: 'success' })
   @Public()
   @Post('/signup')
   async singup(@Body() body: CreateAuthDto, @Res() res): Promise<any> {
@@ -38,6 +40,7 @@ export class AuthController {
     }
   }
 
+  @ApiResponse({ status: 200, description: 'success' })
   @Public()
   @Post('/login')
   async login(@Body() body: LoginAuthDto, @Res() res): Promise<any> {
@@ -78,15 +81,15 @@ export class AuthController {
     }
   }
 
-  @Public()
+  @ApiResponse({ status: 200, description: 'success' })
   @Patch('/gender/:id')
   async updateGender(
     @Body() gender: UpdateAuthDto,
-    @Param() id,
+    @Param('id') id: string,
     @Res() res,
   ): Promise<any> {
     try {
-      const user = await this.authserVice.updateUser(id.id, gender);
+      const user = await this.authserVice.updateUser(id, gender);
       if (user) {
         return res.status(HttpStatus.OK).json({
           message: 'success',

@@ -7,7 +7,7 @@ export enum Gender {
 }
 
 export class UpdateAuthDto {
-  @ApiProperty({ enum: Gender, example: 'MALE or FEMALE' })
-  @IsEnum(Gender, { message: 'Gender(MALE/FEMALE) should not be empty ' })
+  @ApiProperty({ enum: Gender, example: 'Male or Female' })
+  @IsEnum(Gender, { message: 'Gender should be (Male / Female)' })
   gender: Gender;
 }
