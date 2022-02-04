@@ -45,9 +45,9 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
-## swagger
+## Swagger
 ```bash
-# development
+# url
 http://localhost:4200/api/
 ```
 ## Test
