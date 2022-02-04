@@ -16,7 +16,6 @@ import { ErrorResponseDTO } from 'src/utils/helpers';
 import { Public } from './decorator';
 import { ApiCookieAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-@ApiCookieAuth()
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
@@ -64,7 +63,7 @@ export class AuthController {
     }
   }
 
-  // @Public()
+  @ApiCookieAuth()
   @Get('/users')
   async getUsers(@Res() res): Promise<any> {
     try {
@@ -81,6 +80,7 @@ export class AuthController {
     }
   }
 
+  @ApiCookieAuth()
   @ApiResponse({ status: 200, description: 'success' })
   @Patch('/gender/:id')
   async updateGender(

@@ -11,12 +11,14 @@ async function bootstrap() {
       credentials: true,
     },
   });
+  app.setGlobalPrefix('v1');
   const config = new DocumentBuilder()
     .addCookieAuth()
     .setTitle('Users')
     .setDescription('The users API description')
     .setVersion('1.0')
     .addTag('users')
+    .addServer('http://localhost:4200/', 'localhost')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

@@ -4,12 +4,12 @@ import { Public } from './auth/decorator';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('public')
-@Controller()
+@Controller('/public')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Public()
-  @Get()
+  @Get('/test')
   getHello(): string {
     return this.appService.getHello();
   }
