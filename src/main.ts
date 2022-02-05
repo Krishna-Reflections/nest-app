@@ -13,17 +13,16 @@ async function bootstrap() {
   });
   app.setGlobalPrefix('v1');
   const config = new DocumentBuilder()
-    .addCookieAuth()
     .setTitle('Users')
     .setDescription('The users API description')
     .setVersion('1.0')
     .addTag('users')
-    .addServer('http://localhost:4200/', 'localhost')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
   app.useGlobalPipes(new ValidationPipe());
-  app.use(cookieParser('secret'));
+  // app.use(cookieParser('secret'));
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,

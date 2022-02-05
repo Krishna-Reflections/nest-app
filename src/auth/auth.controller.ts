@@ -14,7 +14,7 @@ import {
 } from '@nestjs/common';
 import { ErrorResponseDTO } from 'src/utils/helpers';
 import { Public } from './decorator';
-import { ApiCookieAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -54,6 +54,7 @@ export class AuthController {
       });
       return res.status(HttpStatus.OK).json({
         message: 'success',
+        token,
       });
     } catch (error) {
       return res.status(HttpStatus.BAD_REQUEST).json({
@@ -63,7 +64,7 @@ export class AuthController {
     }
   }
 
-  @ApiCookieAuth()
+  @ApiBearerAuth()
   @Get('/users')
   async getUsers(@Res() res): Promise<any> {
     try {
@@ -80,7 +81,7 @@ export class AuthController {
     }
   }
 
-  @ApiCookieAuth()
+  @ApiBearerAuth()
   @ApiResponse({ status: 200, description: 'success' })
   @Patch('/gender/:id')
   async updateGender(
