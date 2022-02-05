@@ -26,6 +26,10 @@ export class AuthService {
     });
   }
 
+  async findUserById(id): Promise<any> {
+    return await this.authModel.findById(id).select('id role');
+  }
+
   isValidId(id) {
     if (!isValidObjectId(id)) {
       throw new HttpException('Invalid id', HttpStatus.BAD_REQUEST);
